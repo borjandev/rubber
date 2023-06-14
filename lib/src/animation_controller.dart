@@ -487,7 +487,7 @@ class RubberAnimationController extends Animation<double>
     _simulation = simulation;
     _lastElapsedDuration = Duration.zero;
     _value = simulation.x(0.0);
-    final TickerFuture result = _ticker?.start();
+    final TickerFuture result = _ticker?.start() ?? TickerFuture.complete();
     _status = AnimationStatus.forward;
     notifyStatusListeners(_status);
     return result;
