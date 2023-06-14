@@ -325,7 +325,7 @@ class RubberAnimationController extends Animation<double>
   /// controller's ticker might get muted, in which case the animation
   /// controller's callbacks will no longer fire even though time is continuing
   /// to pass. See [Ticker.muted] and [TickerMode].
-  bool get isAnimating => _ticker != null && _ticker!.isActive;
+  bool get isAnimating => _ticker != null && _ticker?.isActive == true;
 
   /// Tells if the animations is running(forward) or completed
   @override
@@ -487,7 +487,7 @@ class RubberAnimationController extends Animation<double>
     _simulation = simulation;
     _lastElapsedDuration = Duration.zero;
     _value = simulation.x(0.0);
-    final TickerFuture result = _ticker!.start();
+    final TickerFuture result = _ticker?.start();
     _status = AnimationStatus.forward;
     notifyStatusListeners(_status);
     return result;
@@ -534,7 +534,7 @@ class RubberAnimationController extends Animation<double>
   String toStringDetails() {
     final String paused = isAnimating ? '' : '; paused';
     final String ticker =
-        _ticker == null ? '; DISPOSED' : (_ticker!.muted ? '; silenced' : '');
+        _ticker == null ? '; DISPOSED' : (_ticker?.muted == true ? '; silenced' : '');
     final String label = debugLabel == null ? '' : '; for $debugLabel';
     final String more =
         '${super.toStringDetails()} ${value.toStringAsFixed(3)}';
